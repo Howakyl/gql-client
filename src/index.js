@@ -2,12 +2,25 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+
 
 const client = new ApolloClient({
-  uri: 'https://localhost:4000/graphql',
+  uri: 'http://localhost:4000/graphql',
   cache: new InMemoryCache()
 });
+
+client.query({
+  query: gql`
+    query cats {
+      cats {
+        id
+        name
+      }
+    }
+  `
+})
+.then(result => console.log(result))
 
 ReactDOM.render(
   <React.StrictMode>
