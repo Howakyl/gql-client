@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
 
 
 const client = new ApolloClient({
@@ -10,21 +11,23 @@ const client = new ApolloClient({
   cache: new InMemoryCache()
 });
 
-client.query({
-  query: gql`
-    query cats {
-      cats {
-        id
-        name
-      }
-    }
-  `
-})
-.then(result => console.log(result))
+// client.query({
+//   query: gql`
+//     query cats {
+//       cats {
+//         id
+//         name
+//       }
+//     }
+//   `
+// })
+// .then(result => console.log(result))
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
