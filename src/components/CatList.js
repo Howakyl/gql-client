@@ -1,16 +1,6 @@
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import{ RENDER_CATS }from '../graphql/queries/renderCats';
-
-
-// const RENDER_CATS = gql`
-//   query cats {
-//     cats {
-//       name
-//       id
-//     }
-//   }
-// `
 
 const CatList = () => {
   const { loading, error, data } = useQuery(RENDER_CATS);

@@ -1,29 +1,13 @@
 import React from 'react';
-import {gql, useMutation, useQuery } from '@apollo/client';
-import CatList from './CatList';
+import { useMutation } from '@apollo/client';
+import {RENDER_CATS} from '../graphql/queries/renderCats';
+import {CREATE_CAT } from '../graphql/mutations/createCats';
 
-const CREATE_CAT = gql`
-  mutation createCat($name: String!) {
-    createCat(name: $name) {
-      id
-      name
-    }
-  }
-`
 
-const RENDER_CATS = gql`
-  query cats {
-    cats {
-      name
-      id
-    }
-  }
-`
 
 const NewCat = () => {
   let input;
   const [createCat, ] = useMutation(CREATE_CAT);
-  const { loading, error, data } = useQuery(RENDER_CATS);
 
   return (
     <form action=""
