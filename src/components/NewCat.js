@@ -1,5 +1,6 @@
 import React from 'react';
-import {gql, useMutation } from '@apollo/client';
+import {gql, useMutation, useQuery } from '@apollo/client';
+import CatList from './CatList';
 
 const CREATE_CAT = gql`
   mutation createCat($name: String!) {
@@ -10,15 +11,25 @@ const CREATE_CAT = gql`
   }
 `
 
+const RENDER_CATS = gql`
+  query cats {
+    cats {
+      name
+      id
+    }
+  }
+`
+
 const NewCat = () => {
   let input;
-  const [createCat, _] = useMutation(CREATE_CAT);
+  const [createCat, ] = useMutation(CREATE_CAT);
+  const { loading, error, data } = useQuery(RENDER_CATS);
 
   return (
     <form action=""
     onSubmit={e => {
       e.preventDefault();
-      createCat({variables: {name: input.value} });
+      createCat({variables: {name: input.value}, refetchQueries: [{query: RENDER_CATS}]});
       input.value = '';
       }}
     >
