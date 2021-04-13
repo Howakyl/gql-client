@@ -1,7 +1,7 @@
 import React from 'react';
 import { useMutation } from '@apollo/client';
-import {RENDER_CATS} from '../graphql/queries/renderCats';
-import {CREATE_CAT } from '../graphql/mutations/createCats';
+import { RENDER_CATS } from '../graphql/queries/renderCats';
+import { CREATE_CAT } from '../graphql/mutations/createCats';
 
 
 
